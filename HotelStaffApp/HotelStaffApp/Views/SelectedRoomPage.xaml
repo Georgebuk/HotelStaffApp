@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="HotelStaffApp.Views.SelectedRoomPage"
+             NavigationPage.HasNavigationBar="False">
+    <ContentPage.Content>
+        <StackLayout>
+            <Label HorizontalOptions="CenterAndExpand"
+                   Text="Room Information:"
+                   Margin="0, 20, 0, 0"
+                   FontSize="28"
+                   TextColor="Black"/>
+            <Label VerticalOptions="CenterAndExpand" 
+                   HorizontalOptions="CenterAndExpand"
+                   Text="{Binding RoomNumber}" 
+                   FontSize="119"
+                   FontAttributes="Bold"
+                   TextDecorations="Underline"
+                   TextColor="Black"/>
+            <StackLayout VerticalOptions="EndAndExpand" 
+                         HorizontalOptions="CenterAndExpand"
+                         Padding="0,0,0,20">
+                <Label Text="Room Status:"
+                       FontSize="28"/>
+                <StackLayout Orientation="Horizontal">
+                    <Label Text="{Binding RoomStatus}"
+                           TextColor="{Binding StatusColour}"
+                           FontAttributes="Bold"
+                           FontSize="28"/>
+                    <Image Source="thumbsup_green.png"
+                           IsVisible="{Binding IsAvailable}"/>
+                    <Image Source="error_red.png"
+                           IsVisible="{Binding ErrorShown}"/>
+                </StackLayout>
+                <Button Text="Solved?"
+                        x:Name="SolvedButton"
+                        Clicked="SolvedButton_Clicked"
+                        IsVisible="{Binding ErrorShown}"/>
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

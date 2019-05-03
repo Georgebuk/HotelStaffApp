@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HotelStaffApp.Views;
+using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -11,7 +12,10 @@ namespace HotelStaffApp
         {
             InitializeComponent();
 
-            MainPage = new MainPage();
+            if(UserHandler.LoggedInUser != null)
+                MainPage = new LoggedInTabbedPage();
+            else
+                MainPage = new LoginRegisterTabbedPage();
         }
 
         protected override void OnStart()

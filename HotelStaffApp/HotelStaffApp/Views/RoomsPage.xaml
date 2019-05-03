@@ -1,0 +1,80 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="HotelStaffApp.Views.RoomsPage"
+             NavigationPage.HasNavigationBar="False">
+    <StackLayout>
+        <SearchBar Placeholder="Search Hotels" 
+                       PlaceholderColor="Gray" 
+                       TextColor="Black"
+                       x:Name="roomsSearch"
+                       HeightRequest="40"                       
+                       TextChanged="RoomsSearch_TextChanged"/>
+        <StackLayout VerticalOptions="CenterAndExpand">
+            <StackLayout IsVisible="{Binding NoHotels_IsVisible}">
+                <Label Text="Sorry, there was a problem retrieving rooms." 
+                           HorizontalTextAlignment="Center"
+                           VerticalTextAlignment="Center"
+                           VerticalOptions="CenterAndExpand"/>
+                <Image Source="noconnectionfrown.png" Opacity="0.2"
+                           VerticalOptions="Center"/>
+            </StackLayout>
+            <StackLayout IsVisible="{Binding FilterLabel_IsVisible}"
+                       VerticalOptions="Center">
+                <Label Text="Sorry, we couldn't find any hotels with that search term." 
+                       HorizontalTextAlignment="Center"
+                       VerticalTextAlignment="Center"
+                       VerticalOptions="CenterAndExpand"/>
+                <Label Text="Please try a different query!"
+                       HorizontalTextAlignment="Center"
+                       VerticalTextAlignment="Center"
+                       VerticalOptions="Center"/>
+                <Image Source="frown.png" Opacity="0.2"
+                       VerticalOptions="Center"/>
+            </StackLayout>
+            <StackLayout IsVisible="{Binding Search_IsVisible}">
+                <ListView x:Name="RoomListView" 
+                            IsPullToRefreshEnabled="True"
+                            RefreshCommand="{Binding RefreshCommand}"
+                            IsRefreshing="{Binding IsRefreshing}"
+                            HasUnevenRows="True" 
+                            ItemsSource="{Binding Rooms}"
+                            ItemTapped="RoomListView_ItemTapped"
+                            SeparatorVisibility="None"
+                            BackgroundColor="#2DC7A8">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <ViewCell.View>
+                                    <Frame x:Name="hotelFrame"
+                                           CornerRadius="10"
+                                           Margin="40,10,40,15"
+                                           HasShadow="True" 
+                                           OutlineColor="Silver" 
+                                           BackgroundColor="White" >
+                                        <StackLayout Orientation="Horizontal">
+                                            <StackLayout Orientation="Vertical"
+                                                         HorizontalOptions="StartAndExpand"
+                                                         Margin="0, 0, 0, 10">
+                                                <Label x:Name="roomName" 
+                                                       Text="{Binding RoomNumber}"
+                                                       HorizontalTextAlignment="Center"/>
+                                            </StackLayout>
+                                            <StackLayout Orientation="Horizontal"
+                                                         HorizontalOptions="EndAndExpand">
+                                                <Label Text="{Binding RoomStatus}"
+                                                       TextColor="{Binding StatusColour}"/>
+                                                <Image Source="error_red.png"
+                                                    IsVisible="{Binding ErrorShown}"/>
+                                            </StackLayout>
+                                        </StackLayout>
+                                    </Frame>
+                                </ViewCell.View>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </StackLayout>
+        </StackLayout>
+    </StackLayout>
+</ContentPage>
