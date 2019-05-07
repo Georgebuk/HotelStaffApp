@@ -12,4 +12,10 @@
             <local1:RoomsPage/>
         </x:Arguments>
     </NavigationPage>
+    <NavigationPage Title="Account"
+                 Icon="accountcirclenopadding.png">
+        <x:Arguments>
+            <local1:AccountPage/>
+        </x:Arguments>
+    </NavigationPage>
 </TabbedPage>

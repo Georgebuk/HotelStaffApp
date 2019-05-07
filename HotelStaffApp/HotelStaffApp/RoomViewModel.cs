@@ -149,6 +149,11 @@ namespace HotelStaffApp
                 });
             }
         }
+
+        public void RefreshRooms()
+        {
+            GetRooms();
+        }
     }
 
 }

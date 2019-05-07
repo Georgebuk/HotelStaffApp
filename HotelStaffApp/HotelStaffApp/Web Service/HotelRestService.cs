@@ -59,7 +59,7 @@ namespace HotelStaffApp.Web_Service
             return rooms;
         }
 
-        public async void BookDownRoom(string report, int roomID)
+        public async Task<bool> BookDownRoom(string report, int roomID)
         {
             string reportURI = URIString.WEBAPIURI + "Hotel/BookDown";
             var uri = new Uri(reportURI);
@@ -77,16 +77,17 @@ namespace HotelStaffApp.Web_Service
                 var response = await Client.PostAsync(reportURI, content);
                 if(response.IsSuccessStatusCode)
                 {
-
+                    return true;
                 }
             }
             catch (Exception e)
             {
 
             }
+            return false;
         }
 
-        public async void SolveProblem(int roomID)
+        public async Task<bool> SolveProblem(int roomID)
         {
             string reportURI = URIString.WEBAPIURI + "Hotel/Solve/" + roomID;
             var uri = new Uri(reportURI);
@@ -96,13 +97,14 @@ namespace HotelStaffApp.Web_Service
                 var response = await Client.GetAsync(uri);
                 if (response.IsSuccessStatusCode)
                 {
-
+                    return true;
                 }
             }
             catch (Exception e)
             {
 
             }
+            return false;
         }
     }
 }
